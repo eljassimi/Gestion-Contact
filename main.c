@@ -10,8 +10,9 @@ typedef struct {
 
 contact Contact[1000];
 int c = 0;
-/*void ajouter_contact() {
+void ajouter_contact() {
     int l;
+    do {
         printf("Entrer le nom du contact\n");
         scanf("%s", Contact[c].Nom);
         printf("Entrer le numero de tele\n");
@@ -19,20 +20,21 @@ int c = 0;
         printf("Entrer l email : \n");
         scanf("%s", Contact[c].email);
         c++;
-        printf(" est ce que vous voulez ajouter un autre contact: apuiez 1 pour oui et 2 pour non\n");
-        do{
-            scanf("%d",&l);
-        }while(l==1 || l==2);
 
-        if(l==1){
-            ajouter_contact();
-        }
-        else if(l==2){
-            return;
-        }
-}*/
+        printf("Voulez-vous ajouter un autre contact? Appuyez sur 1 pour oui et 2 pour non\n");
+        do {
+            scanf("%d", &l);
+            if (l != 1 && l != 2) {
+                printf("Entrée invalide. Appuyez sur 1 pour oui et 2 pour non\n");
+            }
+        } while (l != 1 && l != 2);
 
-void ajouter_contact() {
+    } while (l == 1);
+
+    // If l is 2, the function will simply return and exit.
+}
+
+/*void ajouter_contact() {
     int j;
     printf("Combien de contacts voulez-vous ajouter ?\n");
     scanf("%d", &j);
@@ -45,7 +47,7 @@ void ajouter_contact() {
         scanf("%s", Contact[c].email);
         c++;
     }
-}
+}*/
 
 void modifier_contact(char nom[]) {
     char nom_modifier[20];
