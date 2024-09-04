@@ -31,23 +31,10 @@ void ajouter_contact() {
 
     } while (l == 1);
 
-    // If l is 2, the function will simply return and exit.
+
 }
 
-/*void ajouter_contact() {
-    int j;
-    printf("Combien de contacts voulez-vous ajouter ?\n");
-    scanf("%d", &j);
-    for (int i = 0; i < j; i++) {
-        printf("Entrer le nom du contact\n");
-        scanf("%s", Contact[c].Nom);
-        printf("Entrer le numero de tele\n");
-        scanf("%s", Contact[c].tele);
-        printf("Entrer l email : \n");
-        scanf("%s", Contact[c].email);
-        c++;
-    }
-}*/
+
 
 void modifier_contact(char nom[]) {
     char nom_modifier[20];
