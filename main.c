@@ -13,8 +13,16 @@ int c = 0;
 void ajouter_contact() {
     int l;
     do {
+
         printf("Entrer le nom du contact\n");
         scanf("%s", Contact[c].Nom);
+    for(int i=0;i<c;i++){
+        while(strcmp(Contact[c].Nom,Contact[i].Nom)==0){
+            printf("ce nom existe dans memoire. ajouter un diffirent nom :\n");
+            scanf("%s", Contact[c].Nom);
+        }
+
+    }
         printf("Entrer le numero de tele\n");
         scanf("%s", Contact[c].tele);
         printf("Entrer l email : \n");
@@ -77,6 +85,7 @@ void recherche_contact(char nom[]) {
             printf("Nom : %s \n", Contact[i].Nom);
             printf("Telephone : %s \n", Contact[i].tele);
             printf("Email : %s \n", Contact[i].email);
+
             return;
         }
     }
