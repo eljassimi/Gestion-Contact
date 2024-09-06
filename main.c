@@ -12,7 +12,10 @@ contact Contact[1000];
 int c = 0;
 int r=-1;
 
-
+void supprimercmd(){
+   system("pause");
+   system("cls");
+}
 int rechercheContact(char name[]){
         for(int i=0;i<c;i++){
         r = strcmp(name,Contact[i].Nom);
@@ -192,6 +195,7 @@ int main() {
                 supprimer_contact(nom);
 
         }
+            supprimercmd();
     } while (choix != 0);
     return 0;
 }
