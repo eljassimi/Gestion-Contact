@@ -11,7 +11,36 @@ typedef struct {
 contact Contact[1000];
 int c = 0;
 int r=-1;
+contact tmp;
 
+void triCarnetA_Z(){
+  for(int i=0;i<c-1;i++){
+    for(int j=i+1;j<c;j++){
+        if (strcmp(Contact[i].Nom,Contact[j].Nom)>0){
+            tmp=Contact[i];
+            Contact[i]=Contact[j];
+            Contact[j]=tmp;
+        }
+    }
+  }
+
+
+
+}
+void triCarnetZ_A(){
+  for(int i=0;i<c-1;i++){
+    for(int j=i+1;j<c;j++){
+        if (strcmp(Contact[i].Nom,Contact[j].Nom)<0){
+            tmp=Contact[i];
+            Contact[i]=Contact[j];
+            Contact[j]=tmp;
+        }
+    }
+  }
+
+
+
+}
 void supprimercmd(){
    system("pause");
    system("cls");
@@ -93,7 +122,7 @@ void afficher_tous_contact() {
     }
 
     else {
-         printf("Les informations du contacts %d : \n");
+         printf("Les informations du contacts: \n");
         for (int i = 0; i < c; i++) {
                 char nom[20];
                 strcpy(nom, Contact[i].Nom);
@@ -162,6 +191,8 @@ int main() {
         printf("4- Afficher les Contacts\n");
         printf("5- Afficher un seul Contact\n");
         printf("6- Supprimer un Contact\n");
+        printf("7- Trier le carnet en orde croissent\n");
+        printf("8- Trier le carnet en orde decroissent\n");
         printf("0- Quitter\n");
         printf("===================================\n");
         scanf("%d", &choix);
@@ -193,7 +224,13 @@ int main() {
                 printf("Entrer le nom du contact\n");
                 scanf("%s", nom);
                 supprimer_contact(nom);
-
+                  break;
+            case 7 :
+                triCarnetA_Z();
+                break;
+            case 8 :
+                triCarnetZ_A();
+                break;
         }
             supprimercmd();
     } while (choix != 0);
