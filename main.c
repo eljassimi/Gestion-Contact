@@ -13,34 +13,6 @@ int c = 0;
 int r=-1;
 contact tmp;
 
-void triCarnetA_Z(){
-  for(int i=0;i<c-1;i++){
-    for(int j=i+1;j<c;j++){
-        if (strcmp(Contact[i].Nom,Contact[j].Nom)>0){
-            tmp=Contact[i];
-            Contact[i]=Contact[j];
-            Contact[j]=tmp;
-        }
-    }
-  }
-
-
-
-}
-void triCarnetZ_A(){
-  for(int i=0;i<c-1;i++){
-    for(int j=i+1;j<c;j++){
-        if (strcmp(Contact[i].Nom,Contact[j].Nom)<0){
-            tmp=Contact[i];
-            Contact[i]=Contact[j];
-            Contact[j]=tmp;
-        }
-    }
-  }
-
-
-
-}
 void supprimercmd(){
    system("pause");
    system("cls");
@@ -53,19 +25,17 @@ int rechercheContact(char name[]){
         }
 }
 return r;
-
 }
 int rechercheIndiceContact(char name[]){
-    int i=-1;
+        int i=-1;
         for(i=0;i<c;i++){
         if(strcmp(name,Contact[i].Nom)==0){
             return i;
         }
-
 }
 return i;
-
 }
+
 void Afficher_un_Contact(char nom[]){
     int indice=rechercheIndiceContact(nom);
    if(indice != -1){
@@ -81,7 +51,7 @@ void Afficher_un_Contact(char nom[]){
 void ajouter_contact(char name[]) {
     int l;
      while(rechercheContact(name)==0){
-        printf("ce nom existe dans memoire.\n ajouter un diffirent nom :\n");
+        printf("ce nom n'existe pas dans le carnet.\n ajouter un diffirent nom :\n");
         scanf("%s",name);
         }
         strcpy(Contact[c].Nom,name);
@@ -118,15 +88,12 @@ void modifier_contact(char nom[]) {
 }
 void afficher_tous_contact() {
     if (c == 0) {
-        printf("Aucun contact dans la mémoire :\n");
+        printf("Aucun contact dans le carnet\n");
     }
-
     else {
-         printf("Les informations du contacts: \n");
+         printf("Les informations du contacts :\n");
         for (int i = 0; i < c; i++) {
-                char nom[20];
-                strcpy(nom, Contact[i].Nom);
-             Afficher_un_Contact(nom);
+             Afficher_un_Contact(Contact[i].Nom);
              printf("\n=========================\n");
         }
     }
@@ -161,29 +128,59 @@ void supprimer_contact(char nom[]) {
     c--;
 }
 }
-/*void supprimer_contact(char nom[]) {
-    int index = -1;
-    for (int i = 0; i < c; i++) {
-        if (strcmp(Contact[i].Nom, nom) == 0) {
-            index = i;
-            break;
+void tri_insertion(){
+for(int i=1;i<c;i++){
+    tmp=Contact[i];
+    int j=i-1;
+    while(strcmp(Contact[j].Nom,tmp.Nom) > 0 && j>=0){
+        Contact[j+1]=Contact[j];
+        j--;
+    }
+    Contact[j+1]=tmp;
+}
+}
+
+void tri_a_bulle(){
+    for (int i=0;i<c-1;i++){
+        for(int j=0;j<c-i-1;j++){
+           if (strcmp(Contact[j].Nom,Contact[j+1].Nom) > 0){
+            tmp=Contact[j];
+            Contact[j]=Contact[j+1];
+            Contact[j+1]=tmp;
+        }
         }
     }
-    if (index != -1) {
-        for (int i = index; i < c - 1; i++) {
-            Contact[i] = Contact[i + 1];
+}
+
+void triCarnetA_Z(){
+  for(int i=0;i<c-1;i++){
+    for(int j=i+1;j<c;j++){
+        if (strcmp(Contact[i].Nom,Contact[j].Nom) > 0){
+            tmp=Contact[i];
+            Contact[i]=Contact[j];
+            Contact[j]=tmp;
         }
-        c--;
-    } else {
-        printf("Le contact n'existe pas.\n");
     }
-}*/
+  }
+}
+
+void triCarnetZ_A(){
+  for(int i=0;i<c-1;i++){
+    for(int j=i+1;j<c;j++){
+        if (strcmp(Contact[i].Nom,Contact[j].Nom)<0){
+            tmp=Contact[i];
+            Contact[i]=Contact[j];
+            Contact[j]=tmp;
+       }
+    }
+  }
+}
 
 int main() {
     int choix;
     char nom[20];
     char name[20];
-    do {
+    do{
         printf("\n===================================\n");
         printf("1- Ajouter un Contact \n");
         printf("2- Modifier un Contact\n");
@@ -202,16 +199,19 @@ int main() {
                 scanf("%s",name);
                 ajouter_contact(name);
                 break;
+
             case 2:
                 printf("Entrer le nom du contact\n");
                 scanf("%s", nom);
                 modifier_contact(nom);
                 break;
+
             case 3:
                 printf("Entrer le nom du contact\n");
                 scanf("%s", nom);
                 recherche_contact(nom);
                 break;
+
             case 4:
                 afficher_tous_contact();
                 break;
@@ -221,12 +221,26 @@ int main() {
                 Afficher_un_Contact(nom);
                 break;
             case 6 :
-                printf("Entrer le nom du contact\n");
-                scanf("%s", nom);
-                supprimer_contact(nom);
+                printf("Est ce que vous avez sur : tapez 1- Oui || 2-Non");
+                int w;
+                scanf("%d",&w);
+                while(w != 1 && w != 2){
+                   printf("tapez 1- Oui || 2-Non");
+                   scanf("%d",&w);
+                }
+                if(w==1){
+                   printf("Entrer le nom du contact\n");
+                   scanf("%s", nom);
+                   supprimer_contact(nom);
+                }else if(w==2){
+                    printf("contact non supprimer \n");
+                   }
+
                   break;
             case 7 :
-                triCarnetA_Z();
+                //tri_a_bulle();
+                tri_insertion();
+               // triCarnetA_Z();
                 break;
             case 8 :
                 triCarnetZ_A();
